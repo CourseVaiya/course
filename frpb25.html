@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC FRPB 25</title>
+    <style>
+        @import url('https://fonts.maateen.me/kalpurush/font.css');
+
+        body {
+            font-family: 'Kalpurush', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .container {
+            width: 100%; /* Full width */
+            max-width: 800px; /* Max width for larger screens */
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .video-section {
+            margin-bottom: 20px;
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-section iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* 100% height to match the aspect ratio */
+            border: none;
+            border-radius: 8px;
+        }
+
+        .touch-block-top {
+            position: absolute;
+            top: 0;
+            left: 0; /* Upper touch block */
+            width: 100%; /* Full width to cover the entire top */
+            height: 50%; /* Adjust height to cover the upper half */
+            background-color: rgba(255, 255, 255, 0); /* Transparent */
+            pointer-events: auto; /* Enable pointer events */
+        }
+
+        .touch-block-right {
+            position: absolute;
+            top: 0;
+            right: 0; /* Right touch block */
+            width: 50%; /* Adjust width to control the touch block width */
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0); /* Transparent */
+            pointer-events: auto; /* Enable pointer events for the touch block */
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .control-button {
+            font-family: 'Kalpurush', Arial, sans-serif; /* Apply Kalpurush font */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .control-button:hover {
+            background-color: #0056b3;
+        }
+
+        .note {
+            background-color: #eafaf1;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 5px solid #31a952;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .pdf-link {
+            color: #fff;
+            background-color: #007bff;
+            display: block;
+            margin: 10px auto; /* Center the link */
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center; /* Center the text */
+            width: fit-content; /* Adjust width to fit content */
+        }
+
+        .pdf-link:hover {
+            background-color: #0056b3;
+        }
+
+        .video-list {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px; /* Add margin for separation */
+        }
+
+        .video-list h2 {
+            font-size: 18px;
+            color: #d9534f;
+            margin-bottom: 10px;
+        }
+
+        .video-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .video-list ul li {
+            margin-bottom: 10px;
+        }
+
+        .video-list ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .video-list ul li a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+    <script>
+        var player;
+
+        function loadVideo(videoId, pdfLink, note) {
+            document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+            document.getElementById('pdfLink').href = pdfLink;
+            document.getElementById('videoNote').innerText = "Playing '" + note + "'";
+            if (player) {
+                player.loadVideoById(videoId); // Load the video by ID
+            } else {
+                player = new YT.Player('videoPlayer', {
+                    height: '390',
+                    width: '640',
+                    videoId: videoId,
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+            }
+        }
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoPlayer', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            player.playVideo(); // Auto-play video when ready
+            player.setPlaybackQuality('hd1080'); // Set quality to 1080p
+        }
+
+        function playVideo() {
+            player.playVideo();
+        }
+
+        function pauseVideo() {
+            player.pauseVideo();
+        }
+
+        function changeSpeed(speed) {
+            if (player && speed) {
+                player.setPlaybackRate(parseFloat(speed)); // Set playback speed
+            }
+        }
+
+        function seekForward() {
+            if (player) {
+                player.seekTo(player.getCurrentTime() + 5); // Seek forward by 5 seconds
+            }
+        }
+
+        function seekBackward() {
+            if (player) {
+                player.seekTo(player.getCurrentTime() - 5); // Seek backward by 5 seconds
+            }
+        }
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>SSC FRPB 25</h1>
+
+    <!-- Main Video Player -->
+    <div class="video-section">
+        <iframe id="videoPlayer" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID?enablejsapi=1" allowfullscreen></iframe>
+        <div class="touch-block-top"></div> <!-- Upper touch block -->
+        <div class="touch-block-right"></div> <!-- Right touch block -->
+    </div>
+
+    <div class="controls">
+        <button class="control-button" onclick="playVideo()">Play</button>
+        <button class="control-button" onclick="pauseVideo()">Pause</button>
+        <button class="control-button" onclick="seekBackward()">৫ সেকেন্ড পিছনে</button>
+        <button class="control-button" onclick="seekForward()">৫ সেকেন্ড সামনে</button>
+    </div>
+
+    <div class="note" id="videoNote">Playing 'পদার্থের চাপ ও অবস্থা'</div>
+    
+    <!-- New Note Above PDF Link -->
+    <div class="note" style="margin-top: 10px;">যে ক্লাস করতে চান সেটির উপর ক্লিক করুন <br> যদি ক্লাস প্লে না হয় ভিডিও বাম পাশে নিচে ক্লিক করেন</div>
+
+    <a id="pdfLink" href="https://drive.google.com/YOUR_DEFAULT_PDF_LINK" target="_blank" class="pdf-link">পিডিএফ দেখুন</a>
+
+    <!-- Scrollable video list in a card -->
+    <div class="video-list">
+        <h2>** সব ভিডিও পেতে স্ক্রল করো **</h2>
+        <ul>
+            <li><a onclick="loadVideo('yIW6A2H30NE', 'https://drive.google.com/YOUR_PDF_LINK_1', 'পদার্থের চাপ ও অবস্থা')">পদার্থের চাপ ও অবস্থা</a></li>
+            <li><a onclick="loadVideo('YOUR_VIDEO_ID_2', 'https://drive.google.com/YOUR_PDF_LINK_2', 'অপরিচিতা পর্ব-০১')">অপরিচিতা পর্ব-০১</a></li>
+            <li><a onclick="loadVideo('YOUR_VIDEO_ID_3', 'https://drive.google.com/YOUR_PDF_LINK_3', 'অপরিচিতা পর্ব-০২')">অপরিচিতা পর্ব-০২</a></li>
+            <li><a onclick="loadVideo('YOUR_VIDEO_ID_4', 'https://drive.google.com/YOUR_PDF_LINK_4', 'অপরিচিতা পর্ব-০৩')">অপরিচিতা পর্ব-০৩</a></li>
+            <li><a onclick="loadVideo('YOUR_VIDEO_ID_5', 'https://drive.google.com/YOUR_PDF_LINK_5', 'অপরিচিতা পর্ব-০৪')">অপরিচিতা পর্ব-০৪</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
