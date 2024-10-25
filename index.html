@@ -25,6 +25,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px;
             max-width: 300px; /* ফোন স্ক্রিনের সাথে এডজাস্ট হবে */
+            height: 400px; /* কার্ডের উচ্চতা নির্ধারণ করা হলো */
             text-align: center;
             overflow: hidden;
             text-decoration: none; /* লিঙ্কের আন্ডারলাইন বন্ধ করে */
@@ -38,7 +39,8 @@
 
         .card-image {
             width: 100%;
-            height: auto;
+            height: 200px; /* কার্ড ইমেজের উচ্চতা নির্ধারণ করা হলো */
+            object-fit: cover; /* ইমেজের ফিটিং ভালো করার জন্য */
         }
 
         .card-info {
@@ -71,32 +73,24 @@
 </head>
 <body>
     <div class="container">
-        <a href="https://coursevaiya.github.io/free-paid-course-vaiya/sscfrb25" target="_blank" class="card"> <!-- এখানে আপনার লিংক দিন -->
+        <a href="https://coursevaiya.github.io/free-paid-course-vaiya/sscfrb25" target="_blank" class="card"> 
             <img src="https://i.postimg.cc/6Q5q83XJ/new-3.jpg" alt="কার্ড ইমেজ" class="card-image">
             <div class="card-info">
                 <h2 class="card-title">SSC FRB 2025</h2>
                 <p class="card-description">পদার্থবিজ্ঞান, রসায়ন, সাধারন গণিত, উচ্চতর গণিত এবং বায়োলজি কাভার করা হবে</p>
                 <p class="card-price">৳ ফ্রি</p>
-              
-</div>
+            </div>
+        </a>
 
-
-
-
-
- <div class="container">
-        <a href="https://coursevaiya.github.io/free-paid-course-vaiya/sscfrb25" target="_blank" class="card"> <!-- এখানে আপনার লিংক দিন -->
+        <a href="https://coursevaiya.github.io/free-paid-course-vaiya/sscfrb25" target="_blank" class="card"> 
             <img src="https://i.postimg.cc/6Q5q83XJ/new-.jpg" alt="কার্ড ইমেজ" class="card-image">
             <div class="card-info">
                 <h2 class="card-title">পণ্যের নাম</h2>
                 <p class="card-description">এটি একটি সংক্ষিপ্ত বর্ণনা যা পণ্যের সম্পর্কে তথ্য দেবে।</p>
                 <p class="card-price">৳ 1,500</p>
                 <p class="card-details">আরও তথ্য: বৈশিষ্ট্য 1, বৈশিষ্ট্য 2, বৈশিষ্ট্য 3</p>
-</div>
-
-
-
-
-
+            </div>
+        </a>
+    </div>
 </body>
 </html>
