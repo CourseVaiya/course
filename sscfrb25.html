@@ -48,8 +48,7 @@
             border: none;
             border-radius: 8px;
         }
-
-				 .touch-block-top {
+																					.touch-block-top {
             position: absolute;
             top: 0;
             left: 0; /* Upper touch block */
@@ -68,7 +67,8 @@
             background-color: rgba(255, 255, 255, 0); /* Transparent */
             pointer-events: auto; /* Enable pointer events for the touch block */
         }
-			   .controls {
+    
+        .controls {
             text-align: center;
             margin-top: 10px;
         }
@@ -208,6 +208,12 @@
                 player.seekTo(player.getCurrentTime() - 5);
             }
         }
+
+        function setPlaybackSpeed(speed) {
+            if (player) {
+                player.setPlaybackRate(speed);
+            }
+        }
     </script>
     <script src="https://www.youtube.com/iframe_api"></script>
 </head>
@@ -226,11 +232,13 @@
         <button class="control-button" onclick="pauseVideo()">Pause</button>
         <button class="control-button" onclick="seekBackward()">৫ সেকেন্ড পিছনে</button>
         <button class="control-button" onclick="seekForward()">৫ সেকেন্ড সামনে</button>
+        <button class="control-button" onclick="setPlaybackSpeed(1)">1x</button>
+        <button class="control-button" onclick="setPlaybackSpeed(2)">2x</button>
     </div>
 
-    <div class="note" id="videoNote">Playing 'বাক্য-প্রকরণ'</div>
+    <div class="note" id="videoNote">Playing ''</div>
 
-    <div class="note" style="margin-top: 10px;">যে ক্লাস করতে চান সেটির উপর ক্লিক করুন <br> যদি ক্লাস প্লে না হয় ভিডিও বাম পাশে নিচে ক্লিক করেন</div>
+    <div class="note" style="margin-top: 10px;">যে ক্লাস করতে চান সেটির উপর ক্লিক করুন <br> ক্লাস প্লে করতে ভিডিওর বাম পাশে ▶ ক্লিক করেন</div>
 
     <div style="display: flex; gap: 10px; justify-content: center;">
         <a id="pdfLink" href="https://drive.google.com/YOUR_DEFAULT_PDF_LINK" target="_blank" class="pdf-link">পিডিএফ দেখুন</a>
@@ -243,7 +251,7 @@
         <ul>
             <li><a onclick="loadVideo('5gQBzmAr4jE', 'https://drive.google.com/YOUR_PDF_LINK_1', 'https://drive.google.com/YOUR_PRACTICE_LINK_1', 'বাস্তব সংখ্যা - ১')">বাস্তব সংখ্যা - ১</a></li>
             <li><a onclick="loadVideo('RYihZdiXn88', 'https://drive.google.com/YOUR_PDF_LINK_2', 'https://drive.google.com/YOUR_PRACTICE_LINK_2', 'বাস্তব সংখ্যা - ২')">বাস্তব সংখ্যা - ২</a></li>
-                        <li><a onclick="loadVideo('LQCB6Z3_DgY', 'https://drive.google.com/file/d/1PUEEASRdisbdZborfORdc95mldtDTHWM/view', 'https://drive.google.com/file/d/1bspgQfYzGviA8XLIQGXiHsxfWqJeqem7/view', 'গতি')">গতি</a></li>
+            <li><a onclick="loadVideo('LQCB6Z3_DgY', 'https://drive.google.com/file/d/1PUEEASRdisbdZborfORdc95mldtDTHWM/view', 'https://drive.google.com/file/d/1bspgQfYzGviA8XLIQGXiHsxfWqJeqem7/view', 'গতি')">গতি</a></li>
         </ul>
     </div>
 </div>
