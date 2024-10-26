@@ -238,12 +238,17 @@
         <iframe id="videoPlayer" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID?enablejsapi=1" allowfullscreen></iframe>
     </div>
 
+    <div class="video-container">
+    <iframe id="videoPlayer" width="640" height="390" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <div class="controls">
         <button class="control-button" onclick="playVideo()">Play</button>
         <button class="control-button" onclick="pauseVideo()">Pause</button>
         <button class="control-button" onclick="seekBackward()">৫ সেকেন্ড পিছনে</button>
         <button class="control-button" onclick="seekForward()">৫ সেকেন্ড সামনে</button>
+        <button class="control-button" id="normalSpeed">1x</button>
+        <button class="control-button" id="doubleSpeed">2x</button>
     </div>
+</div>
 
     <div class="note" id="videoNote">Playing 'নাথিং'</div>
 
