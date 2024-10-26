@@ -157,74 +157,57 @@
     <script>
         var player;
 
-    function loadVideo(videoId, pdfLink, practiceLink, note) {
-        document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-        document.getElementById('pdfLink').href = pdfLink;
-        document.getElementById('practiceLink').href = practiceLink;
-        document.getElementById('videoNote').innerText = "Playing '" + note + "'";
-        if (player) {
-            player.loadVideoById(videoId);
-        } else {
+        function loadVideo(videoId, pdfLink, practiceLink, note) {
+            document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+            document.getElementById('pdfLink').href = pdfLink;
+            document.getElementById('practiceLink').href = practiceLink;
+            document.getElementById('videoNote').innerText = "Playing '" + note + "'";
+            if (player) {
+                player.loadVideoById(videoId);
+            } else {
+                player = new YT.Player('videoPlayer', {
+                    height: '390',
+                    width: '640',
+                    videoId: videoId,
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+            }
+        }
+
+        function onYouTubeIframeAPIReady() {
             player = new YT.Player('videoPlayer', {
-                height: '390',
-                width: '640',
-                videoId: videoId,
                 events: {
                     'onReady': onPlayerReady
                 }
             });
         }
-    }
 
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('videoPlayer', {
-            events: {
-                'onReady': onPlayerReady
+        function onPlayerReady(event) {
+            player.playVideo();
+            player.setPlaybackQuality('hd1080');
+        }
+
+        function playVideo() {
+            player.playVideo();
+        }
+
+        function pauseVideo() {
+            player.pauseVideo();
+        }
+
+        function seekForward() {
+            if (player) {
+                player.seekTo(player.getCurrentTime() + 5);
             }
-        });
-    }
-
-    function onPlayerReady(event) {
-        player.playVideo();
-        player.setPlaybackQuality('hd1080');
-    }
-
-    function playVideo() {
-        player.playVideo();
-    }
-
-    function pauseVideo() {
-        player.pauseVideo();
-    }
-
-    function seekForward() {
-        if (player) {
-            player.seekTo(player.getCurrentTime() + 5);
         }
-    }
 
-    function seekBackward() {
-        if (player) {
-            player.seekTo(player.getCurrentTime() - 5);
+        function seekBackward() {
+            if (player) {
+                player.seekTo(player.getCurrentTime() - 5);
+            }
         }
-    }
-
-    // স্পিড কন্ট্রোলারের জন্য কোড
-    const normalSpeedButton = document.getElementById('normalSpeed');
-    const doubleSpeedButton = document.getElementById('doubleSpeed');
-
-    normalSpeedButton.addEventListener('click', function() {
-        if (player) {
-            player.setPlaybackRate(1.0); // ১x স্পিড
-        }
-    });
-
-    doubleSpeedButton.addEventListener('click', function() {
-        if (player) {
-            player.setPlaybackRate(2.0); // ২x স্পিড
-        }
-    });
-
     </script>
     <script src="https://www.youtube.com/iframe_api"></script>
 </head>
@@ -238,21 +221,16 @@
         <iframe id="videoPlayer" src="https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID?enablejsapi=1" allowfullscreen></iframe>
     </div>
 
-    <div class="video-container">
-    <iframe id="videoPlayer" width="640" height="390" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <div class="controls">
         <button class="control-button" onclick="playVideo()">Play</button>
         <button class="control-button" onclick="pauseVideo()">Pause</button>
         <button class="control-button" onclick="seekBackward()">৫ সেকেন্ড পিছনে</button>
         <button class="control-button" onclick="seekForward()">৫ সেকেন্ড সামনে</button>
-        <button class="control-button" id="normalSpeed">1x</button>
-        <button class="control-button" id="doubleSpeed">2x</button>
     </div>
-</div>
 
-    <div class="note" id="videoNote">Playing 'নাথিং'</div>
+    <div class="note" id="videoNote">Playing 'বাক্য-প্রকরণ'</div>
 
-    <div class="note" style="margin-top: 10px;">যে ক্লাস করতে চান সেটির উপর ক্লিক করুন <br> ক্লাস প্লে না হলে ভিডিও এর নিচে বা ▶ আইকনে ক্লিক করেন</div>
+    <div class="note" style="margin-top: 10px;">যে ক্লাস করতে চান সেটির উপর ক্লিক করুন <br> যদি ক্লাস প্লে না হয় ভিডিও বাম পাশে নিচে ক্লিক করেন</div>
 
     <div style="display: flex; gap: 10px; justify-content: center;">
         <a id="pdfLink" href="https://drive.google.com/YOUR_DEFAULT_PDF_LINK" target="_blank" class="pdf-link">পিডিএফ দেখুন</a>
@@ -265,7 +243,7 @@
         <ul>
             <li><a onclick="loadVideo('5gQBzmAr4jE', 'https://drive.google.com/YOUR_PDF_LINK_1', 'https://drive.google.com/YOUR_PRACTICE_LINK_1', 'বাস্তব সংখ্যা - ১')">বাস্তব সংখ্যা - ১</a></li>
             <li><a onclick="loadVideo('RYihZdiXn88', 'https://drive.google.com/YOUR_PDF_LINK_2', 'https://drive.google.com/YOUR_PRACTICE_LINK_2', 'বাস্তব সংখ্যা - ২')">বাস্তব সংখ্যা - ২</a></li>
-                        <li><a onclick="loadVideo('LQCB6Z3_DgY', 'https://drive.google.com/file/d/1PUEEASRdisbdZborfORdc95mldtDTHWM/view', 'https://drive.google.com/file/d/1bspgQfYzGviA8XLIQGXiHsxfWqJeqem7/view', 'গতি')">গতি</a></li>
+                        <li><a onclick="loadVideo('YOUR_VIDEO_ID_3', 'https://drive.google.com/file/d/1PUEEASRdisbdZborfORdc95mldtDTHWM/view', 'https://drive.google.com/file/d/1bspgQfYzGviA8XLIQGXiHsxfWqJeqem7/view', 'গতি')">গতি</a></li>
         </ul>
     </div>
 </div>
