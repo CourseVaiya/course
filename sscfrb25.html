@@ -157,57 +157,74 @@
     <script>
         var player;
 
-        function loadVideo(videoId, pdfLink, practiceLink, note) {
-            document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-            document.getElementById('pdfLink').href = pdfLink;
-            document.getElementById('practiceLink').href = practiceLink;
-            document.getElementById('videoNote').innerText = "Playing '" + note + "'";
-            if (player) {
-                player.loadVideoById(videoId);
-            } else {
-                player = new YT.Player('videoPlayer', {
-                    height: '390',
-                    width: '640',
-                    videoId: videoId,
-                    events: {
-                        'onReady': onPlayerReady
-                    }
-                });
-            }
-        }
-
-        function onYouTubeIframeAPIReady() {
+    function loadVideo(videoId, pdfLink, practiceLink, note) {
+        document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+        document.getElementById('pdfLink').href = pdfLink;
+        document.getElementById('practiceLink').href = practiceLink;
+        document.getElementById('videoNote').innerText = "Playing '" + note + "'";
+        if (player) {
+            player.loadVideoById(videoId);
+        } else {
             player = new YT.Player('videoPlayer', {
+                height: '390',
+                width: '640',
+                videoId: videoId,
                 events: {
                     'onReady': onPlayerReady
                 }
             });
         }
+    }
 
-        function onPlayerReady(event) {
-            player.playVideo();
-            player.setPlaybackQuality('hd1080');
-        }
-
-        function playVideo() {
-            player.playVideo();
-        }
-
-        function pauseVideo() {
-            player.pauseVideo();
-        }
-
-        function seekForward() {
-            if (player) {
-                player.seekTo(player.getCurrentTime() + 5);
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('videoPlayer', {
+            events: {
+                'onReady': onPlayerReady
             }
-        }
+        });
+    }
 
-        function seekBackward() {
-            if (player) {
-                player.seekTo(player.getCurrentTime() - 5);
-            }
+    function onPlayerReady(event) {
+        player.playVideo();
+        player.setPlaybackQuality('hd1080');
+    }
+
+    function playVideo() {
+        player.playVideo();
+    }
+
+    function pauseVideo() {
+        player.pauseVideo();
+    }
+
+    function seekForward() {
+        if (player) {
+            player.seekTo(player.getCurrentTime() + 5);
         }
+    }
+
+    function seekBackward() {
+        if (player) {
+            player.seekTo(player.getCurrentTime() - 5);
+        }
+    }
+
+    // স্পিড কন্ট্রোলারের জন্য কোড
+    const normalSpeedButton = document.getElementById('normalSpeed');
+    const doubleSpeedButton = document.getElementById('doubleSpeed');
+
+    normalSpeedButton.addEventListener('click', function() {
+        if (player) {
+            player.setPlaybackRate(1.0); // ১x স্পিড
+        }
+    });
+
+    doubleSpeedButton.addEventListener('click', function() {
+        if (player) {
+            player.setPlaybackRate(2.0); // ২x স্পিড
+        }
+    });
+
     </script>
     <script src="https://www.youtube.com/iframe_api"></script>
 </head>
